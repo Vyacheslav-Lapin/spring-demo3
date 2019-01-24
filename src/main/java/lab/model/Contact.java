@@ -2,8 +2,9 @@ package lab.model;
 
 public interface Contact {
 
-    enum ContactType { TELEPHONE, EMAIL }
+  ContactType getType();
 
-    ContactType getType();
-    String getValue();
+  String getValue();
+
+  enum ContactType {TELEPHONE, EMAIL}
 }

@@ -10,8 +10,8 @@ import static lab.model.Contact.ContactType.TELEPHONE;
 @Builder
 public class ContactImpl implements Contact {
 
-    @Default
-    ContactType type = TELEPHONE;
+  @Default
+  ContactType type = TELEPHONE;
 
-    String value;
+  String value;
 }

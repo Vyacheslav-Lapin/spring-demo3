@@ -4,19 +4,19 @@ import java.util.List;
 
 public interface Person {
 
-    int getId();
+  int getId();
 
-    String getName();
+  String getName();
 
-    Country getCountry();
+  Country getCountry();
 
-    int getAge();
+  int getAge();
 
-    float getHeight();
+  float getHeight();
 
-    boolean isProgrammer();
+  boolean isProgrammer();
 
-    List<Contact> getContacts();
+  List<Contact> getContacts();
 
-    void sayHello(Person person);
+  void sayHello(Person person);
 }

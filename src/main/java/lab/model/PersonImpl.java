@@ -14,25 +14,25 @@ import java.util.List;
 //@Entity
 @SuppressWarnings("WeakerAccess")
 public class PersonImpl implements Person {
-    //@Id
-    @Default
-    int id = 1;
+  //@Id
+  @Default
+  int id = 1;
 
-    String name;
+  String name;
 
-    //@ManyToOne(fetch = FetchType.EAGER)
-    //@JoinColumn(name = "country_id")
-    Country country;
+  //@ManyToOne(fetch = FetchType.EAGER)
+  //@JoinColumn(name = "country_id")
+  Country country;
 
-    int age;
-    float height;
-    boolean isProgrammer;
+  int age;
+  float height;
+  boolean isProgrammer;
 
-    @Singular
-    List<Contact> contacts;
+  @Singular
+  List<Contact> contacts;
 
-    @Override
-    public void sayHello(Person person) {
-        // TODO: realize it!
-    }
+  @Override
+  public void sayHello(Person person) {
+    // TODO: realize it!
+  }
 }

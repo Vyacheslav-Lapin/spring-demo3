@@ -16,7 +16,6 @@ public class CountryImpl implements Country {
   @Default
   @NonFinal
   int id = 1;
-
   String name;
   String codeName;
 
