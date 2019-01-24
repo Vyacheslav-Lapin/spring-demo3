@@ -22,7 +22,6 @@ public class HelloWorldTest {
   BeanFactory context = new ClassPathXmlApplicationContext(
     APPLICATION_CONTEXT_XML_FILE_NAME);
 
-  @SuppressWarnings("WeakerAccess")
   static Person getExpectedPerson() {
     return PersonImpl.builder()
       .name("John Smith")
