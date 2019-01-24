@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="person" class="lab.model.PersonImpl"
+          c:name="John Smith"
+          c:age="35"
+          c:country-ref="country"
+          c:height="1.78"
+          c:id="1"
+          c:isProgrammer="true"
+          c:contacts-ref="contacts"/>
+
+    <bean id="country" class="lab.model.CountryImpl"
+          c:id="1"
+          c:name="Russia"
+          c:codeName="RU"/>
+
+    <util:list id="contacts">
+        <bean class="lab.model.ContactImpl"
+              c:type="TELEPHONE"
+              c:value="222-33-22"/>
+        <bean class="lab.model.ContactImpl"
+              c:type="EMAIL"
+              c:value="john@smith.com"/>
+    </util:list>
+</beans>
