@@ -1,70 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.luxoft.training.spring</groupId>
-	<artifactId>spring-demo3</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-demo3</name>
-	<description>Demo project for Spring Boot</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.2.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  <groupId>com.luxoft.training.spring</groupId>
+  <artifactId>spring-demo3</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>spring-demo3</name>
+  <description>Demo project for Spring Boot</description>
 
-	<properties>
-		<java.version>11</java.version>
-	</properties>
+  <properties>
+    <maven.version>3.6.0</maven.version>
+    <java.version>11</java.version>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-rest</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+    <junit-jupiter.version>5.4.0-M1</junit-jupiter.version>
+    <assertj-core.version>3.11.1</assertj-core.version>
+    <java-hamcrest.version>2.0.0.0</java-hamcrest.version>
+    <mockito-all.version>2.0.2-beta</mockito-all.version>
 
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
+  </properties>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+  <dependencyManagement>
+    <dependencies>
+
+      <!-- TEST -->
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-params</artifactId>
+        <version>${junit-jupiter.version}</version>
+        <scope>test</scope>
+      </dependency><!-- org.junit.jupiter:junit-jupiter-params:${junit-jupiter.version} -->
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>java-hamcrest</artifactId>
+        <version>${java-hamcrest.version}</version>
+        <scope>test</scope>
+      </dependency><!-- org.hamcrest:java-hamcrest:${java-hamcrest.version} -->
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+        <version>${mockito-all.version}</version>
+        <scope>test</scope>
+      </dependency><!-- org.mockito:mockito-all:${mockito-all.version} -->
+      <dependency>
+        <groupId>org.junit.vintage</groupId>
+        <artifactId>junit-vintage-engine</artifactId>
+        <version>${junit-jupiter.version}</version>
+        <scope>test</scope>
+      </dependency><!-- org.junit.vintage:junit-vintage-engine:${junit-jupiter.version} -->
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${junit-jupiter.version}</version>
+        <scope>test</scope>
+      </dependency><!-- org.junit.jupiter:junit-jupiter-engine:${junit-jupiter.version} -->
+
+
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-rest</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- TEST (JUnit Jupiter, AssertJ, Hamcrest, Mockito) -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+    </dependency><!-- org.junit.jupiter:junit-jupiter-params -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+    </dependency><!-- org.assertj:assertj-core -->
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>java-hamcrest</artifactId>
+    </dependency><!-- org.hamcrest:java-hamcrest -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+    </dependency><!-- org.mockito:mockito-all -->
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+    </dependency><!-- org.junit.vintage:junit-vintage-engine -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+    </dependency><!-- org.junit.jupiter:junit-jupiter-engine -->
+
+  </dependencies>
+
+  <build>
+
+    <pluginManagement>
+      <plugins>
+         <plugin>
+           <artifactId>maven-enforcer-plugin</artifactId>
+           <version>${maven-enforcer-plugin.version}</version>
+           <executions>
+             <execution>
+               <id>enforce-maven</id>
+               <goals>
+                 <goal>enforce</goal>
+               </goals>
+               <configuration>
+                 <rules>
+                   <requireMavenVersion>
+                     <version>${maven.version}</version>
+                   </requireMavenVersion>
+                 </rules>
+               </configuration>
+             </execution>
+           </executions>
+         </plugin><!-- :maven-enforcer-plugin:${maven-enforcer-plugin.version} -->
+
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin><!-- :maven-enforcer-plugin -->
+    </plugins>
+  </build>
 
 </project>
