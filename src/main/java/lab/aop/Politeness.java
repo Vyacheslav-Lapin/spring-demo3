@@ -1,39 +1,48 @@
 package lab.aop;
 
 
+import lab.model.CustomerBrokenException;
 import lab.model.Person;
-import org.aspectj.lang.JoinPoint;
+import lab.model.Squishee;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import lab.model.Squishee;
+import org.springframework.stereotype.Component;
 
 @Aspect
+@Component
 public class Politeness {
 
-    @Before("execution(* sellSquishee(..))")
-    public void sayHello(JoinPoint joinPiont) {
-        System.out.println("Hello " + ((Person) joinPiont.getArgs()[0]).getName() + ". How are you doing? \n");
-    }
+  @Pointcut("execution(* sellSquishee(..))")
+  public final void sellSquishee() {
+  }
 
-    @AfterReturning(pointcut = "execution(* sellSquishee(..))",
-            returning = "retVal", argNames = "retVal")
-    public void askOpinion(Object retVal) {
-        System.out.println("Is " + ((Squishee) retVal).getName() + " Good Enough? \n");
-    }
+  @Before("sellSquishee() && args(person)")
+  public void sayHello(Person person) {
+    System.out.printf("Hello %s. How are you doing?\n", person.getName());
+  }
 
-    public void sayYouAreNotAllowed() {
-        System.out.println("Hmmm... \n");
-    }
+  @AfterReturning(pointcut = "sellSquishee()",
+    returning = "retVal", argNames = "retVal")
+  public void askOpinion(Squishee retVal) {
+    System.out.printf("Is %s Good Enough? \n", retVal.getName());
+  }
 
-    public void sayGoodBye() {
-        System.out.println("Good Bye! \n");
-    }
+  @AfterThrowing(value = "sellSquishee()", throwing = "e")
+  public void sayYouAreNotAllowed(CustomerBrokenException e) {
+    System.out.println("Hmmm... " + e.getMessage());
+  }
 
-    public Object sayPoliteWordsAndSell(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("Hi! \n");
-        Object retVal = pjp.proceed();
-        System.out.println("See you! \n");
-        return retVal;
-    }
+  @After("sellSquishee()")
+  public void sayGoodBye() {
+    System.out.println("Good Bye!");
+  }
+
+  @Around("sellSquishee()")
+  public Object sayPoliteWordsAndSell(ProceedingJoinPoint pjp) throws Throwable {
+    System.out.println("Hi!");
+    Object retVal = pjp.proceed();
+    System.out.println("See you!");
+    return retVal;
+  }
 
 }

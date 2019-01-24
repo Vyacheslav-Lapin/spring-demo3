@@ -185,7 +185,6 @@
              </execution>
            </executions>
          </plugin><!-- :maven-enforcer-plugin:${maven-enforcer-plugin.version} -->
-
       </plugins>
     </pluginManagement>
 
