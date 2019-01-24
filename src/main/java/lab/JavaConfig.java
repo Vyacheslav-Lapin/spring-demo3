@@ -2,15 +2,21 @@ package lab;
 
 import lab.model.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import java.util.List;
 
 import static lab.model.Contact.ContactType.EMAIL;
 import static lombok.AccessLevel.PRIVATE;
 
+//@SpringBootApplication
 @Configuration
+@ComponentScan
+@EnableAspectJAutoProxy
 @FieldDefaults(level = PRIVATE)
 public class JavaConfig {
 

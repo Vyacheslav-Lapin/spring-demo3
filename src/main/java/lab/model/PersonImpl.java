@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Builder.Default;
 import lombok.Singular;
 import lombok.Value;
+import lombok.experimental.Wither;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
 //@Entity
 @SuppressWarnings("WeakerAccess")
 public class PersonImpl implements Person {
+
   //@Id
   @Default
   int id = 1;
@@ -28,8 +30,13 @@ public class PersonImpl implements Person {
   float height;
   boolean isProgrammer;
 
+  @Wither
+  @Default
+  boolean broke = false;
+
   @Singular
   List<Contact> contacts;
+
 
   @Override
   public void sayHello(Person person) {

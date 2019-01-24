@@ -18,5 +18,9 @@ public interface Person {
 
   List<Contact> getContacts();
 
+  boolean isBroke();
+
+  Person withBroke(boolean broke);
+
   void sayHello(Person person);
 }

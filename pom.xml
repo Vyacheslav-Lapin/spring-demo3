@@ -24,11 +24,29 @@
     <java-hamcrest.version>2.0.0.0</java-hamcrest.version>
     <mockito-all.version>2.0.2-beta</mockito-all.version>
 
+    <lombok.version>1.18.4</lombok.version>
+    <checker.version>2.5.7</checker.version>
+    <annotations.version>16.0.3</annotations.version>
+
     <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+
+      <!-- CODE GENERATION (CheckerFramework) -->
+      <dependency>
+          <groupId>org.checkerframework</groupId>
+          <artifactId>checker</artifactId>
+          <version>${checker.version}</version>
+          <scope>provided</scope>
+      </dependency><!-- org.checkerframework:checker:${checker.version} -->
+      <dependency>
+          <groupId>org.jetbrains</groupId>
+          <artifactId>annotations</artifactId>
+          <version>${annotations.version}</version>
+          <scope>provided</scope>
+      </dependency><!-- org.jetbrains:annotations:${annotations.version} -->
 
       <!-- TEST -->
       <dependency>
@@ -67,6 +85,17 @@
   </dependencyManagement>
 
   <dependencies>
+
+    <!-- CODE GENERATION (Lombok, Checkerframework, JetBrains Annotations) -->
+    <dependency>
+        <groupId>org.checkerframework</groupId>
+        <artifactId>checker</artifactId>
+    </dependency><!-- org.checkerframework:checker -->
+    <dependency>
+        <groupId>org.jetbrains</groupId>
+        <artifactId>annotations</artifactId>
+    </dependency><!-- org.jetbrains:annotations -->
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
