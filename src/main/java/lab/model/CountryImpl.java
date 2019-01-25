@@ -1,23 +1,30 @@
 package lab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.*;
 import lombok.Builder.Default;
-import lombok.Setter;
-import lombok.Value;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
-import org.springframework.data.annotation.Id;
 
-@Value
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import static lombok.AccessLevel.PRIVATE;
+
+@Data
+@Entity
+@Table(name = "Country")
 @Builder
 @AllArgsConstructor
+@FieldDefaults(level = PRIVATE)
 public class CountryImpl implements Country {
 
   @Id
   @Setter
-  @Default
   @NonFinal
-  Integer id = 1;
+  @GeneratedValue
+  Integer id;
 
   String name;
   String codeName;
