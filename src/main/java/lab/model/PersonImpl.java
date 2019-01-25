@@ -13,7 +13,6 @@ import java.util.List;
 @Value
 @Builder
 //@Entity
-@SuppressWarnings("WeakerAccess")
 public class PersonImpl implements Person {
 
   //@Id
@@ -40,6 +39,6 @@ public class PersonImpl implements Person {
 
   @Override
   public void sayHello(Person person) {
-    // TODO: realize it!
+    System.out.printf("Hello, %s, I'm %s\n", person.getName(), name);
   }
 }

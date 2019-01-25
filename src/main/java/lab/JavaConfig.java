@@ -3,10 +3,7 @@ package lab;
 import lab.model.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ import static lombok.AccessLevel.PRIVATE;
 @Configuration
 @ComponentScan
 @EnableAspectJAutoProxy
+@ImportResource("classpath:application-context.xml")
 @FieldDefaults(level = PRIVATE)
 public class JavaConfig {
 
