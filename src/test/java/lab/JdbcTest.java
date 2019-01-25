@@ -32,7 +32,7 @@ class JdbcTest {
   List<Country> expectedCountryList = new ArrayList<Country>();
   List<Country> expectedCountryListStartsWithA = new ArrayList<Country>();
   Country countryWithChangedName = CountryImpl.builder()
-    .id(1)
+    .id(8)
     .name("Russia")
     .codeName("RU").build();
 
