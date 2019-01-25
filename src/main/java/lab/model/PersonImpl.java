@@ -30,8 +30,7 @@ public class PersonImpl implements Person {
   boolean isProgrammer;
 
   @Wither
-  @Default
-  boolean broke = false;
+  boolean broke;
 
   @Singular
   List<Contact> contacts;

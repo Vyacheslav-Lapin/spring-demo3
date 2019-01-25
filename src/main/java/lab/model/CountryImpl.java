@@ -6,16 +6,19 @@ import lombok.Builder.Default;
 import lombok.Setter;
 import lombok.Value;
 import lombok.experimental.NonFinal;
+import org.springframework.data.annotation.Id;
 
 @Value
 @Builder
 @AllArgsConstructor
 public class CountryImpl implements Country {
 
+  @Id
   @Setter
   @Default
   @NonFinal
-  int id = 1;
+  Integer id = 1;
+
   String name;
   String codeName;
 

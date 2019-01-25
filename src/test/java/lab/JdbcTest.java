@@ -1,9 +1,8 @@
 package lab;
 
-import lab.dao.CountryDao;
+import lab.dao.CountryJdbcDao;
 import lab.model.Country;
 import lab.model.CountryImpl;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,7 @@ import static org.junit.Assert.assertNotNull;
 class JdbcTest {
 
   @Autowired
-  CountryDao countryDao;
+  CountryJdbcDao countryJdbcDao;
 
   List<Country> expectedCountryList = new ArrayList<Country>();
   List<Country> expectedCountryListStartsWithA = new ArrayList<Country>();
@@ -39,13 +38,13 @@ class JdbcTest {
   @BeforeEach
   void setUp() {
     initExpectedCountryLists();
-    countryDao.loadCountries();
+    countryJdbcDao.loadCountries();
   }
 
   @Test
   @DirtiesContext
   void testCountryList() {
-    List<Country> countryList = countryDao.getCountryList();
+    List<Country> countryList = countryJdbcDao.getCountryList();
     assertNotNull(countryList);
     assertEquals(expectedCountryList.size(), countryList.size());
     for (int i = 0; i < expectedCountryList.size(); i++)
@@ -55,7 +54,7 @@ class JdbcTest {
   @Test
   @DirtiesContext
   void testCountryListStartsWithA() {
-    List<Country> countryList = countryDao.getCountryListStartWith("A");
+    List<Country> countryList = countryJdbcDao.getCountryListStartWith("A");
     assertNotNull(countryList);
     assertEquals(expectedCountryListStartsWithA.size(), countryList.size());
     for (int i = 0; i < expectedCountryListStartsWithA.size(); i++)
@@ -65,13 +64,13 @@ class JdbcTest {
   @Test
   @DirtiesContext
   void testCountryChange() {
-    countryDao.updateCountryName("RU", "Russia");
-    assertEquals(countryWithChangedName, countryDao.getCountryByCodeName("RU"));
+    countryJdbcDao.updateCountryName("RU", "Russia");
+    assertEquals(countryWithChangedName, countryJdbcDao.getCountryByCodeName("RU"));
   }
 
   private void initExpectedCountryLists() {
-    for (int i = 0; i < CountryDao.COUNTRY_INIT_DATA.length;) {
-      String[] countryInitData = CountryDao.COUNTRY_INIT_DATA[i++];
+    for (int i = 0; i < CountryJdbcDao.COUNTRY_INIT_DATA.length;) {
+      String[] countryInitData = CountryJdbcDao.COUNTRY_INIT_DATA[i++];
       Country country = CountryImpl.builder()
         .id(i)
         .name(countryInitData[0])
