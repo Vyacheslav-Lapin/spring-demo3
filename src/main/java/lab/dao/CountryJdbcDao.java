@@ -1,5 +1,6 @@
 package lab.dao;
 
+import com.luxoft.training.spring.springdemo3.Java9BackPort;
 import lab.model.Country;
 import lab.model.CountryImpl;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
-import java.util.Map;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -63,7 +63,7 @@ public class CountryJdbcDao extends NamedParameterJdbcDaoSupport {
     //noinspection ConstantConditions
     return getNamedParameterJdbcTemplate()
       .query(GET_COUNTRIES_BY_NAME_SQL,
-        Map.of("name", name + "%"),
+        Java9BackPort.mapOf("name", name + "%"),
         COUNTRY_ROW_MAPPER);
   }
 
