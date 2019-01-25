@@ -5,22 +5,35 @@ import java.util.List;
 import lab.model.Country;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
 import static lombok.AccessLevel.PRIVATE;
 
 @Repository
 @RequiredArgsConstructor
-@FieldDefaults(level = PRIVATE, makeFinal = true)
-public class CountryDao {
+@FieldDefaults(level = PRIVATE)
+public class CountryDao extends NamedParameterJdbcDaoSupport {
 
-  NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-  JdbcTemplate jdbcTemplate;
+//  JdbcTemplate jdbcTemplate;
+//  NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+  @Autowired
+  public void setDS(DataSource dataSource) {
+    super.setDataSource(dataSource);
+//    jdbcTemplate = getJdbcTemplate();
+//    namedParameterJdbcTemplate = getNamedParameterJdbcTemplate();
+  }
 
   static final String LOAD_COUNTRIES_SQL = "insert into country (name, code_name) values ";
   static final String CREATE_COUNTRY_TABLE_SQL = "create table country(id identity, name varchar (255), code_name varchar (255))";
@@ -50,7 +63,7 @@ public class CountryDao {
 	public List<Country> getCountryListStartWith(String name) {
 		SqlParameterSource sqlParameterSource = new MapSqlParameterSource(
 				"name", name + "%");
-		return namedParameterJdbcTemplate.query(GET_COUNTRIES_BY_NAME_SQL,
+		return getNamedParameterJdbcTemplate().query(GET_COUNTRIES_BY_NAME_SQL,
 				sqlParameterSource, COUNTRY_ROW_MAPPER);
 	}
 
@@ -63,7 +76,7 @@ public class CountryDao {
 			String sql = LOAD_COUNTRIES_SQL + "('" + countryData[0] + "', '"
 					+ countryData[1] + "');";
 //			System.out.println(sql);
-			jdbcTemplate.execute(sql);
+			getJdbcTemplate().execute(sql);
 		}
 	}
 
@@ -72,12 +85,12 @@ public class CountryDao {
 		String sql = GET_COUNTRY_BY_CODE_NAME_SQL + codeName + "'";
 //		System.out.println(sql);
 
-		return jdbcTemplate.query(sql, COUNTRY_ROW_MAPPER).get(0);
+		return getJdbcTemplate().query(sql, COUNTRY_ROW_MAPPER).get(0);
 	}
 
 	public Country getCountryByName(String name)
 			throws CountryNotFoundException {
-		List<Country> countryList = jdbcTemplate.query(GET_COUNTRY_BY_NAME_SQL
+		List<Country> countryList = getJdbcTemplate().query(GET_COUNTRY_BY_NAME_SQL
 				+ name + "'", COUNTRY_ROW_MAPPER);
 		if (countryList.isEmpty()) {
 			throw new CountryNotFoundException();

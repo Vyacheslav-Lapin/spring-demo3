@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -19,12 +20,13 @@ import static lombok.AccessLevel.PRIVATE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = JavaConfig.class)
-@FieldDefaults(level = PRIVATE, makeFinal = true)
+@FieldDefaults(level = PRIVATE) //, makeFinal = true
 class JdbcTest {
 
+  @Autowired
   CountryDao countryDao;
 
   List<Country> expectedCountryList = new ArrayList<Country>();
